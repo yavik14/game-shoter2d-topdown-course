@@ -1,0 +1,123 @@
+[gd_scene load_steps=9 format=3 uid="uid://csty7n33xqyxd"]
+
+[ext_resource type="Script" uid="uid://bho82u42s4cw" path="res://scripts/enemy_bat.gd" id="1_8f2c3"]
+[ext_resource type="Texture2D" uid="uid://bcbgm6t8e3ld4" path="res://art/enemies/e1.png" id="1_v6v0u"]
+[ext_resource type="Texture2D" uid="uid://dqvsds0n5goig" path="res://art/shadows/ss2.png" id="3_8h7tc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8f2c3"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_8h7tc"]
+resource_name = "flyRight"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_oral2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xbmos"]
+resource_name = "flyLeft"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_veom1"]
+_data = {
+&"RESET": SubResource("Animation_oral2"),
+&"flyLeft": SubResource("Animation_xbmos"),
+&"flyRight": SubResource("Animation_8h7tc")
+}
+
+[node name="Bat" type="CharacterBody2D"]
+z_index = 1
+platform_floor_layers = 4294901760
+script = ExtResource("1_8f2c3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v6v0u")
+hframes = 2
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8f2c3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_veom1")
+}
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(-2.9802322e-07, 14)
+scale = Vector2(1.5000001, 1.0625)
+texture = ExtResource("3_8h7tc")
