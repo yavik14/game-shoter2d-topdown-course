@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Soldier2dShooterTopDown"
-run/main_scene="uid://bsproq1tl70dq"
+run/main_scene="uid://dwv8o6vucfb2y"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [dotnet]
 
