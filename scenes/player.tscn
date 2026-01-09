@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dortrtmnuakus"]
+[gd_scene load_steps=12 format=3 uid="uid://dortrtmnuakus"]
 
 [ext_resource type="Texture2D" uid="uid://brvk7dw7o148c" path="res://art/characters/c1.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cwktqwnhw2f4a" path="res://scripts/player.gd" id="1_g2els"]
@@ -52,10 +52,9 @@ tracks/0/keys = {
 "values": [12, 13]
 }
 
-[sub_resource type="Animation" id="Animation_qlg0r"]
-resource_name = "walkLeft"
-length = 0.5
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_tuyoq"]
+resource_name = "hurt"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -63,22 +62,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:flip_h")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.033333335),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"values": [6, 7]
 }
 
 [sub_resource type="Animation" id="Animation_g2els"]
@@ -113,10 +100,14 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qlg0r"]
 _data = {
 &"RESET": SubResource("Animation_qhqgy"),
+&"hurt": SubResource("Animation_tuyoq"),
 &"idle": SubResource("Animation_dqkch"),
-&"walkLeft": SubResource("Animation_qlg0r"),
-&"walkRight": SubResource("Animation_g2els")
+&"walk": SubResource("Animation_g2els")
 }
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 6.0
+height = 22.0
 
 [node name="Player" type="CharacterBody2D"]
 platform_floor_layers = 4294901760
@@ -146,3 +137,10 @@ scale = Vector2(0.8125, 0.9375)
 texture = ExtResource("3_qhqgy")
 
 [node name="Gun" parent="." instance=ExtResource("4_dqkch")]
+
+[node name="HurtZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone"]
+position = Vector2(0, 2)
+shape = SubResource("CapsuleShape2D_dqkch")
+debug_color = Color(0.9880299, 0, 0.31165677, 0.41960785)

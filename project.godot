@@ -19,7 +19,7 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="uid://44y32ebgq03o"
-mouse_cursor/custom_image_hotspot=Vector2(8, 8)
+mouse_cursor/custom_image_hotspot=Vector2(16, 16)
 
 [dotnet]
 
