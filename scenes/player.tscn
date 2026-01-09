@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dortrtmnuakus"]
+[gd_scene load_steps=11 format=3 uid="uid://dortrtmnuakus"]
 
 [ext_resource type="Texture2D" uid="uid://brvk7dw7o148c" path="res://art/characters/c1.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cwktqwnhw2f4a" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://eubyamcyc20n" path="res://art/shadows/ss3.png" id="3_qhqgy"]
+[ext_resource type="PackedScene" uid="uid://d8iqhidyqgok" path="res://scenes/gun.tscn" id="4_dqkch"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(9, 4)
@@ -143,3 +144,5 @@ libraries = {
 position = Vector2(-1.1920929e-07, 9.000001)
 scale = Vector2(0.8125, 0.9375)
 texture = ExtResource("3_qhqgy")
+
+[node name="Gun" parent="." instance=ExtResource("4_dqkch")]
