@@ -6,6 +6,9 @@ extends CharacterBody2D
 @onready var anims = $AnimationPlayer
 @onready var hurtZone = $HurtZone
 @onready var sprite = $Sprite2D
+@onready var progressBar = $ProgressBar
+
+
 
 var isHurt = false
 
@@ -13,6 +16,9 @@ func _ready():
 	anims.animation_finished.connect(_on_animation_finished)
 
 func _physics_process(_delta):
+	
+	updated_health_bar()
+	
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = direction * speed
 	move_and_slide()
@@ -49,3 +55,15 @@ func die():
 func _on_animation_finished(anim_name):
 	if anim_name == "hurt":
 		isHurt = false
+
+func updated_health_bar():
+	progressBar.value = health
+	var fill_style = progressBar.get("theme_override_styles/fill") as StyleBoxFlat
+	if health < 20:
+		fill_style.bg_color = Color.RED
+	elif  health < 50:
+		fill_style.bg_color = Color.ORANGE
+	else :
+		fill_style.bg_color = Color.GREEN
+	
+	
