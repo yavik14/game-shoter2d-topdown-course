@@ -14,6 +14,7 @@ var isHurt = false
 
 func _ready():
 	anims.animation_finished.connect(_on_animation_finished)
+	print_debug("Hello Level")
 
 func _physics_process(_delta):
 	
