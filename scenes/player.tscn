@@ -116,7 +116,7 @@ corner_radius_bottom_left = 10
 radius = 6.0
 height = 22.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 platform_floor_layers = 4294901760
 script = ExtResource("1_g2els")
 
@@ -126,7 +126,7 @@ flip_h = true
 hframes = 6
 vframes = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
 position = Vector2(-0.5, 8)
 shape = SubResource("RectangleShape2D_g2els")
 
@@ -154,9 +154,9 @@ show_percentage = false
 
 [node name="Gun" parent="." instance=ExtResource("4_dqkch")]
 
-[node name="HurtZone" type="Area2D" parent="."]
+[node name="HurtZone" type="Area2D" parent="." groups=["Player"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" groups=["Player"]]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_dqkch")
 debug_color = Color(0.9880299, 0, 0.31165677, 0.41960785)
