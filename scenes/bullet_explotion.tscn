@@ -36,11 +36,13 @@ animations = [{
 }],
 "loop": false,
 "name": &"Explotion",
-"speed": 15.0
+"speed": 12.0
 }]
 
 [node name="BulletExplotion" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_qlws3")
 animation = &"Explotion"
 autoplay = "Explotion"
+frame = 3
+frame_progress = 1.0
 script = ExtResource("2_uf7b5")

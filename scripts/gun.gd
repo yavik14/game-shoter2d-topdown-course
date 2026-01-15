@@ -1,13 +1,15 @@
 extends Node2D
 
+@export var projectile_scene: PackedScene
+
 @onready var animations = $AnimationPlayer
 
 func shoot():
-	const BULLET = preload("res://scenes/bullet.tscn")
-	var newBullet = BULLET.instantiate()
-	newBullet.global_position = $Sprite2D/ShotPoint.global_position
-	newBullet.global_rotation = $Sprite2D/ShotPoint.global_rotation
-	get_tree().current_scene.add_child(newBullet)
+	var projectile = projectile_scene.instantiate()
+	
+	projectile.global_position = $Sprite2D/ShotPoint.global_position
+	projectile.global_rotation = $Sprite2D/ShotPoint.global_rotation
+	get_tree().current_scene.add_child(projectile)
 	
 func _physics_process(delta):
 	var targetPosition = get_global_mouse_position()

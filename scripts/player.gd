@@ -8,8 +8,6 @@ extends CharacterBody2D
 @onready var sprite = $Sprite2D
 @onready var progressBar = $ProgressBar
 
-
-
 var isHurt = false
 
 func _ready():
@@ -41,20 +39,24 @@ func _physics_process(_delta):
 		if enemy.is_in_group("Enemies"):
 			take_damage(1)
 			break
-			
+		
+	
 func take_damage(amount):
 	health -= amount
 	isHurt = true
 	anims.play("hurt")
 	if health <= 0:
 		die()
-		
+	
+	
 func die():
 	get_tree().reload_current_scene()
+	
 	
 func _on_animation_finished(anim_name):
 	if anim_name == "hurt":
 		isHurt = false
+
 
 func updated_health_bar():
 	progressBar.value = health

@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var speed = 200
+@export var explosion_scene: PackedScene
 
 func _ready():
 	await get_tree().create_timer(5.0).timeout
@@ -20,7 +21,7 @@ func _on_body_entered(body):
 		_explotion()
 
 func _explotion():
-	var explotion = preload("res://scenes/bullet_explotion.tscn").instantiate()
+	var explotion = explosion_scene.instantiate()
 	explotion.global_position = global_position
 	get_tree().current_scene.add_child(explotion)
 	queue_free()

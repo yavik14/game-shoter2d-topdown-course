@@ -105,4 +105,4 @@ script = ExtResource("6_2os1m")
 enemy_scenes = Array[PackedScene]([ExtResource("2_pa8r4"), ExtResource("5_2y5yt")])
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemySpawner"]
-polygon = PackedVector2Array(-177, -147, -178, -42, -161, -42, -161, 149, -117, 150, -117, 103, 143, 104, 144, 151, 332, 151, 332, 77, 234, 77, 235, -147, 95, -147, 96, -116, 28, -115, 29, -131, -38, -132, -38, -147)
+polygon = PackedVector2Array(-175, -131, -175, -43, -161, -42, -161, 149, -117, 150, -117, 103, 146, 102, 146, 150, 332, 151, 331, 99, 232, 99, 230, -125, 100, -125, 100, -90, 25, -91, 24, -110, -39, -111, -39, -131)

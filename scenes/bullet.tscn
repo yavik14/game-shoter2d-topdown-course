@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dp0rn5jxtr71p"]
+[gd_scene load_steps=5 format=3 uid="uid://dp0rn5jxtr71p"]
 
 [ext_resource type="Texture2D" uid="uid://coqm43p6u8e6q" path="res://art/weapons/gun_p.png" id="1_mkf8s"]
 [ext_resource type="Script" uid="uid://dhljtbkci01of" path="res://scripts/bullet.gd" id="1_y25gk"]
+[ext_resource type="PackedScene" uid="uid://bpt8nugcchy5s" path="res://scenes/bullet_explotion.tscn" id="2_l5glv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y25gk"]
 radius = 4.0
@@ -9,6 +10,7 @@ height = 16.0
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_y25gk")
+explosion_scene = ExtResource("2_l5glv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5707964

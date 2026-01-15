@@ -1,9 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://dortrtmnuakus"]
+[gd_scene load_steps=16 format=3 uid="uid://dortrtmnuakus"]
 
 [ext_resource type="Texture2D" uid="uid://brvk7dw7o148c" path="res://art/characters/c1.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cwktqwnhw2f4a" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://eubyamcyc20n" path="res://art/shadows/ss3.png" id="3_qhqgy"]
 [ext_resource type="PackedScene" uid="uid://d8iqhidyqgok" path="res://scenes/gun.tscn" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://n4vt0f2u3nh1" path="res://scripts/weapon_manager.gd" id="4_tuyoq"]
+[ext_resource type="PackedScene" uid="uid://bee6rfy7fc8gq" path="res://scenes/bow.tscn" id="6_fjrip"]
+[ext_resource type="PackedScene" uid="uid://dmryx2mvmtfde" path="res://scenes/weapons_inventory.tscn" id="7_fjrip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
 size = Vector2(9, 4)
@@ -152,11 +155,18 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_dqkch")
 step = 0.0
 show_percentage = false
 
-[node name="Gun" parent="." instance=ExtResource("4_dqkch")]
-
 [node name="HurtZone" type="Area2D" parent="." groups=["Player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtZone" groups=["Player"]]
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_dqkch")
 debug_color = Color(0.9880299, 0, 0.31165677, 0.41960785)
+
+[node name="WeaponManager" type="Node2D" parent="."]
+script = ExtResource("4_tuyoq")
+
+[node name="Gun" parent="WeaponManager" instance=ExtResource("4_dqkch")]
+
+[node name="Bow" parent="WeaponManager" instance=ExtResource("6_fjrip")]
+
+[node name="CanvasLayer" parent="WeaponManager" instance=ExtResource("7_fjrip")]
