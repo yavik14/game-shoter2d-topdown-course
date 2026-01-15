@@ -1,0 +1,126 @@
+[gd_scene load_steps=13 format=3 uid="uid://c8kasureo4jhh"]
+
+[ext_resource type="Texture2D" uid="uid://bomkflkgeg6mk" path="res://art/weapons/bow.png" id="1_4gq7n"]
+[ext_resource type="Script" uid="uid://blf86c24tcov1" path="res://scripts/item.gd" id="1_s8enn"]
+
+[sub_resource type="Gradient" id="Gradient_s8enn"]
+offsets = PackedFloat32Array(0, 0.98058254, 1)
+colors = PackedColorArray(0.85882354, 0.7647059, 0.12941177, 1, 0.92941177, 0.74509805, 0.87058824, 0.60784316, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6muww"]
+gradient = SubResource("Gradient_s8enn")
+
+[sub_resource type="Curve" id="Curve_vljjh"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.32832617, 0.4482007), 0.0, 0.0, 0, 0, Vector2(0.6180258, 0.6962924), 0.0, 0.0, 0, 0, Vector2(1, 0.15757918), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ro5b8"]
+curve = SubResource("Curve_vljjh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d265e"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 96.0
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = 223.99998
+gravity = Vector3(0, -10, 0)
+scale_over_velocity_min = 140.0
+scale_over_velocity_max = 250.0
+scale_over_velocity_curve = SubResource("CurveTexture_ro5b8")
+color = Color(1, 1, 0.12941177, 1)
+color_ramp = SubResource("GradientTexture1D_6muww")
+turbulence_noise_strength = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s8enn"]
+radius = 9.0
+
+[sub_resource type="Animation" id="Animation_vljjh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ro5b8"]
+resource_name = "fly"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 0), Vector2(0, 1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6muww"]
+resource_name = "spawn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.25, 1.25), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d265e"]
+_data = {
+&"RESET": SubResource("Animation_vljjh"),
+&"fly": SubResource("Animation_ro5b8"),
+&"spawn": SubResource("Animation_6muww")
+}
+
+[node name="ItemBow" type="Area2D"]
+z_index = 1
+script = ExtResource("1_s8enn")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_d265e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("1_4gq7n")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_s8enn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_d265e")
+}
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

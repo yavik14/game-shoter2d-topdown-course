@@ -150,6 +150,8 @@ sprite_frames = SubResource("SpriteFrames_nnvde")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="Marker2D" type="Marker2D" parent="."]
+
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://c83lni87uig0l"]
+
+[ext_resource type="Texture2D" uid="uid://dp7gu5kt6qt5s" path="res://art/weapons/bow_e.png" id="1_f00si"]
+[ext_resource type="Script" uid="uid://bwlyjwb2qfrsk" path="res://scripts/bullet_explotion.gd" id="2_3egu0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3egu0"]
+atlas = ExtResource("1_f00si")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s12r8"]
+atlas = ExtResource("1_f00si")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvp1w"]
+atlas = ExtResource("1_f00si")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72178"]
+atlas = ExtResource("1_f00si")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qlws3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3egu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s12r8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvp1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72178")
+}],
+"loop": false,
+"name": &"Explotion",
+"speed": 12.0
+}]
+
+[node name="BulletExplotion" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_qlws3")
+animation = &"Explotion"
+autoplay = "Explotion"
+frame = 3
+frame_progress = 1.0
+script = ExtResource("2_3egu0")
