@@ -12,7 +12,7 @@ func _physics_process(delta):
 	position += direction * speed * delta
 
 func _on_body_entered(body):
-	if body.is_in_group("Walls"):
+	if body.is_in_group("Walls") or body.is_in_group("Objects"):
 		_explotion()
 
 func _explotion():

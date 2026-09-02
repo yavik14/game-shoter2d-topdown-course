@@ -17,7 +17,7 @@ func _on_body_entered(body):
 		if body.has_method("take_damage"):
 			body.take_damage()
 		# body.queue_free()
-	elif body.is_in_group("Walls"):
+	elif body.is_in_group("Walls") or body.is_in_group("Objects"):
 		_explotion()
 
 func _explotion():
