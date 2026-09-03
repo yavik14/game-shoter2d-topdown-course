@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dortrtmnuakus"]
+[gd_scene load_steps=17 format=3 uid="uid://dortrtmnuakus"]
 
 [ext_resource type="Texture2D" uid="uid://brvk7dw7o148c" path="res://art/characters/c1.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://cwktqwnhw2f4a" path="res://scripts/player.gd" id="1_g2els"]
@@ -119,6 +119,10 @@ corner_radius_bottom_left = 10
 radius = 6.0
 height = 22.0
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_fjrip"]
+cull_mode = 1
+polygon = PackedVector2Array(-3, -9, -7, -4, -7, 11, -4, 14, 4, 14, 8, 11, 8, -4, 4, -9)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 platform_floor_layers = 4294901760
 script = ExtResource("1_g2els")
@@ -170,3 +174,6 @@ script = ExtResource("4_tuyoq")
 [node name="Bow" parent="WeaponManager" instance=ExtResource("6_fjrip")]
 
 [node name="CanvasLayer" parent="WeaponManager" instance=ExtResource("7_fjrip")]
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_fjrip")
