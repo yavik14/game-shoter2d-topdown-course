@@ -1,0 +1,138 @@
+[gd_scene load_steps=12 format=3 uid="uid://cildmp41qkrvl"]
+
+[ext_resource type="Script" uid="uid://dbhdplt2uvjic" path="res://scripts/boss_bat.gd" id="1_a52dw"]
+[ext_resource type="Texture2D" uid="uid://bcbgm6t8e3ld4" path="res://art/enemies/e1.png" id="2_sctcs"]
+[ext_resource type="PackedScene" uid="uid://cnvs502778m7f" path="res://scenes/enemy_bullet.tscn" id="2_tupbm"]
+[ext_resource type="Texture2D" uid="uid://dqvsds0n5goig" path="res://art/shadows/ss2.png" id="3_tupbm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a52dw"]
+radius = 5.9999995
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_oral2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_8h7tc"]
+resource_name = "fly"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_xbmos"]
+resource_name = "hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_veom1"]
+_data = {
+&"RESET": SubResource("Animation_oral2"),
+&"fly": SubResource("Animation_8h7tc"),
+&"hurt": SubResource("Animation_xbmos")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a52dw"]
+bg_color = Color(0.004049819, 0.0014118872, 0.075847134, 0.6431373)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.0154285, 0.0154285, 0.0154285, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sctcs"]
+bg_color = Color(0.6, 0.19607843, 1, 0.54509807)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.0076186024, 0.0076186024, 0.0076186024, 1)
+
+[node name="BossBat" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 1
+scale = Vector2(5, 5)
+platform_floor_layers = 4294901760
+script = ExtResource("1_a52dw")
+bullet_scene = ExtResource("2_tupbm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sctcs")
+hframes = 2
+vframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0.8)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_a52dw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_veom1")
+}
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(-2.9802322e-07, 14)
+scale = Vector2(1.5000001, 1.0625)
+texture = ExtResource("3_tupbm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -248.0
+offset_top = -55.0
+offset_right = 252.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_a52dw")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sctcs")
+value = 100.0
+
+[node name="Timer" type="Timer" parent="."]
