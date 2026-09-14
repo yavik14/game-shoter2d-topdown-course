@@ -57,7 +57,7 @@ func move_towards(target: Vector2):
 		global_position = target
 		velocity=Vector2.ZERO
 		
-func take_damage(amount:=1):
+func take_damage(amount):
 	anims.stop()
 	anims.play("hurt")
 	health -= amount
