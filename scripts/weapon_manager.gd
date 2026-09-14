@@ -33,7 +33,7 @@ func _ready():
 		for index in owned_weapons.size():
 			if owned_weapons[index].name == GameData.current_weapon:
 				var current_weapon = owned_weapons[index]
-				set_weapon_enabled(current_weapon, true)
+				equip_weapon(index)
 				break
 		
 	update_weapon_ui()
