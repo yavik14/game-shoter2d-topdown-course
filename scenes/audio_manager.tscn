@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://mcid68y4nakq"]
+
+[ext_resource type="Script" uid="uid://c03wb2bx0r4pb" path="res://scripts/audio_manager.gd" id="1_3asnw"]
+[ext_resource type="AudioStream" uid="uid://c0mfy4r14t5v3" path="res://music/H1mur4 - The Crypt.mp3" id="1_8qd8g"]
+[ext_resource type="AudioStream" uid="uid://2g277vhugxvj" path="res://sounds/Shoot2.mp3" id="3_m6ggh"]
+[ext_resource type="AudioStream" uid="uid://de0n53xo0sst" path="res://music/Desecrated Cave ver.1.wav" id="4_m6ggh"]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_3asnw")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_8qd8g")
+volume_db = -20.0
+autoplay = true
+
+[node name="Shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_m6ggh")
+volume_db = -20.0
+pitch_scale = 1.25
+
+[node name="CreditsMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_m6ggh")

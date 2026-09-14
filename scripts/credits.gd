@@ -1,6 +1,7 @@
 extends Control
 
 func _ready():
+	AudioManager.play_credits_music()
 	$AnimationPlayer.animation_finished.connect(_on_animation_finished)
 	
 func _on_animation_finished(anim_name: String):

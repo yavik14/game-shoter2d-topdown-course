@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://csty7n33xqyxd"]
+[gd_scene load_steps=10 format=3 uid="uid://csty7n33xqyxd"]
 
 [ext_resource type="Script" uid="uid://bho82u42s4cw" path="res://scripts/enemy_bat.gd" id="1_8f2c3"]
 [ext_resource type="Texture2D" uid="uid://bcbgm6t8e3ld4" path="res://art/enemies/e1.png" id="1_v6v0u"]
 [ext_resource type="Texture2D" uid="uid://dqvsds0n5goig" path="res://art/shadows/ss2.png" id="3_8h7tc"]
+[ext_resource type="AudioStream" uid="uid://cqiulctmpu8he" path="res://sounds/BatChriping.mp3" id="4_oral2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8f2c3"]
 radius = 6.0
@@ -84,3 +85,10 @@ libraries = {
 position = Vector2(-2.9802322e-07, 14)
 scale = Vector2(1.5000001, 1.0625)
 texture = ExtResource("3_8h7tc")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_oral2")
+volume_db = -20.0
+pitch_scale = 1.2
+autoplay = true
+max_distance = 100.0
