@@ -34,6 +34,7 @@ func _ready():
 			if owned_weapons[index].name == GameData.current_weapon:
 				var current_weapon = owned_weapons[index]
 				set_weapon_enabled(current_weapon, true)
+				GameData.set_current_weapon(current_weapon.name)
 				break
 		
 	update_weapon_ui()

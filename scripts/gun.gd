@@ -10,11 +10,12 @@ func shoot():
 	projectile.global_position = $Sprite2D/ShotPoint.global_position
 	projectile.global_rotation = $Sprite2D/ShotPoint.global_rotation
 	get_tree().current_scene.add_child(projectile)
-	
+		
 func _physics_process(delta):
 	var targetPosition = get_global_mouse_position()
 	var direction = (targetPosition - global_position).angle()
 	rotation = direction
 	if Input.is_action_just_pressed("shoot"):
+		AudioManager.play_shoot_sound()
 		animations.play("shoot")
 		shoot()
