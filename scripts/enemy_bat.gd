@@ -26,10 +26,10 @@ func _physics_process(_delta):
 	else:
 		sprite.flip_h = false
 		
-func take_damage():
+func take_damage(amount):
 	anims.stop()
 	anims.play("hurt")
-	health -= 1
+	health -= amount
 	if (health <= 0):
 		emit_signal("enemy_died")
 		queue_free()

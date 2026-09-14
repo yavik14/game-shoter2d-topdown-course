@@ -3,6 +3,8 @@ extends Area2D
 @export var speed = 200
 @export var explosion_scene: PackedScene
 
+@export var damageAmount = 1
+
 func _ready():
 	await get_tree().create_timer(5.0).timeout
 	queue_free()
@@ -15,7 +17,7 @@ func _on_body_entered(body):
 	if body.is_in_group("Enemies"):
 		_explotion()
 		if body.has_method("take_damage"):
-			body.take_damage()
+			body.take_damage(damageAmount)
 		# body.queue_free()
 	elif body.is_in_group("Walls") or body.is_in_group("Objects"):
 		_explotion()

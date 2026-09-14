@@ -13,19 +13,38 @@ var current_weapon_index = 0
 func _ready():
 	weapons=[$Gun, $Bow]
 	
-	var starting_weapon = weapons[0]
-	owned_weapons.append(starting_weapon)
-	
+
 	for weapon in weapons:
-		set_weapon_enabled(weapon, weapon == starting_weapon)
+		set_weapon_enabled(weapon, false)
+		
+	for weapon_name in GameData.owned_weapons:
+		for weapon in weapons:
+			if weapon.name==weapon_name and weapon not in owned_weapons:
+				owned_weapons.append(weapon)
+				print("Restaurada arma global", weapon_name)
+				
+	if owned_weapons.is_empty():
+		var starting_weapon=weapons[0]
+		owned_weapons.append(starting_weapon)
+		GameData.add_weapon(starting_weapon.name)
+		set_weapon_enabled(starting_weapon, true)
+		
+	else:
+		for index in owned_weapons.size():
+			if owned_weapons[index].name == GameData.current_weapon:
+				var current_weapon = owned_weapons[index]
+				set_weapon_enabled(current_weapon, true)
+				break
 		
 	update_weapon_ui()
 		
 
 func set_weapon_enabled(weapon, enabled):
+	GameData.set_current_weapon(weapon.name)
 	weapon.visible = enabled
 	weapon.set_process(enabled)
 	weapon.set_physics_process(enabled)
+
 	
 
 func equip_weapon(delta):
@@ -42,9 +61,11 @@ func equip_weapon(delta):
 func pickup_weapon_by_name(_weapon_name):
 	for weapon in get_children():
 		if weapon.name == _weapon_name:
-			if weapon not in owned_weapons:
+			if not GameData.has_weapon(_weapon_name):
+				GameData.add_weapon(_weapon_name)
 				owned_weapons.append(weapon)
 				set_weapon_enabled(weapon, false)
+				print("Guardada arma global:", _weapon_name)
 			return
 			
 func _physics_process(delta):
