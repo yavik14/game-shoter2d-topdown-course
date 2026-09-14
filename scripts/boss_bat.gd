@@ -62,6 +62,7 @@ func take_damage(amount):
 	anims.play("hurt")
 	health -= amount
 	if (health <= 0):
+		get_tree().change_scene_to_file("res://scenes/credits.tscn")
 		queue_free()
 		return
 	check_phase()

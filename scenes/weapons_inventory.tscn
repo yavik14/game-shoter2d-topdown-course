@@ -1,6 +1,25 @@
-[gd_scene format=3 uid="uid://dmryx2mvmtfde"]
+[gd_scene load_steps=7 format=3 uid="uid://dmryx2mvmtfde"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[ext_resource type="Script" uid="uid://bej7g2dpphoc0" path="res://scripts/pause_menu.gd" id="1_cnblm"]
+[ext_resource type="Texture2D" uid="uid://cx7hy0a38pbcr" path="res://ui/MediavelFree.png" id="1_ohdh7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnblm"]
+atlas = ExtResource("1_ohdh7")
+region = Rect2(0, 0, 77.28233, 95.63929)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohdh7"]
+atlas = ExtResource("1_ohdh7")
+region = Rect2(223.74779, 33.308517, 32.252213, 29.387894)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2s8t"]
+atlas = ExtResource("1_ohdh7")
+region = Rect2(112.9957, 0.8387356, 14.361588, 14.577562)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6tvn"]
+atlas = ExtResource("1_ohdh7")
+region = Rect2(128.93979, 1.658555, 14.442993, 13.724432)
+
+[node name="GUI" type="CanvasLayer"]
 
 [node name="WeaponsInventory" type="Control" parent="."]
 layout_mode = 3
@@ -54,3 +73,110 @@ offset_left = -32.0
 offset_top = -32.0
 offset_right = 24.0
 offset_bottom = 24.0
+
+[node name="PauseMenu" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cnblm")
+
+[node name="Panel" type="Panel" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -196.0
+offset_top = -222.0
+offset_right = 196.0
+offset_bottom = 222.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_cnblm")
+
+[node name="ResumeButton" type="TextureButton" parent="PauseMenu"]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 256.0
+offset_right = 520.0
+offset_bottom = 285.0
+scale = Vector2(5.585934, 3.7069306)
+texture_normal = SubResource("AtlasTexture_ohdh7")
+
+[node name="Label" type="Label" parent="PauseMenu/ResumeButton"]
+layout_mode = 0
+offset_left = 5.7286744
+offset_top = 8.632479
+offset_right = 132.72867
+offset_bottom = 53.632477
+scale = Vector2(0.17072138, 0.26075867)
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_font_sizes/font_size = 32
+text = "RESUME"
+
+[node name="MenuButton" type="TextureButton" parent="PauseMenu"]
+layout_mode = 0
+offset_left = 488.0
+offset_top = 376.0
+offset_right = 520.0
+offset_bottom = 405.0
+scale = Vector2(5.585934, 3.7069306)
+texture_normal = SubResource("AtlasTexture_ohdh7")
+
+[node name="Label" type="Label" parent="PauseMenu/MenuButton"]
+layout_mode = 0
+offset_left = 7.160843
+offset_top = 8.632479
+offset_right = 107.82796
+offset_bottom = 53.632477
+scale = Vector2(0.17072138, 0.26075867)
+theme_override_colors/font_color = Color(0.012617188, 0.012617188, 0.012617188, 1)
+theme_override_font_sizes/font_size = 32
+text = "MENU"
+
+[node name="PauseBtn" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_top = 16.0
+offset_bottom = 56.0
+grow_horizontal = 0
+scale = Vector2(3.2669208, 3.177686)
+
+[node name="TextureButton" type="TextureButton" parent="PauseBtn"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.692734
+offset_top = -17.482445
+offset_right = 5.307266
+offset_bottom = 22.517555
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5189526, 0.55362386)
+texture_normal = SubResource("AtlasTexture_l2s8t")
+texture_pressed = SubResource("AtlasTexture_b6tvn")
+stretch_mode = 1
+
+[connection signal="pressed" from="PauseMenu/ResumeButton" to="PauseMenu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/MenuButton" to="PauseMenu" method="_on_menu_button_pressed"]
+[connection signal="pressed" from="PauseBtn/TextureButton" to="PauseMenu" method="_on_pause_button_pressed"]
