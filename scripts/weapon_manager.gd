@@ -13,7 +13,6 @@ var current_weapon_index = 0
 func _ready():
 	weapons=[$Gun, $Bow]
 	
-
 	for weapon in weapons:
 		set_weapon_enabled(weapon, false)
 		
@@ -27,21 +26,24 @@ func _ready():
 		var starting_weapon=weapons[0]
 		owned_weapons.append(starting_weapon)
 		GameData.add_weapon(starting_weapon.name)
+		GameData.set_current_weapon_index(0)
 		set_weapon_enabled(starting_weapon, true)
 		
 	else:
 		for index in owned_weapons.size():
 			if owned_weapons[index].name == GameData.current_weapon:
 				var current_weapon = owned_weapons[index]
+				current_weapon_index = index
 				set_weapon_enabled(current_weapon, true)
-				GameData.set_current_weapon(current_weapon.name)
+				# GameData.set_current_weapon(current_weapon.name)
 				break
 		
 	update_weapon_ui()
 		
 
 func set_weapon_enabled(weapon, enabled):
-	GameData.set_current_weapon(weapon.name)
+	if enabled:
+		GameData.set_current_weapon(weapon.name)
 	weapon.visible = enabled
 	weapon.set_process(enabled)
 	weapon.set_physics_process(enabled)
@@ -54,6 +56,7 @@ func equip_weapon(delta):
 	
 	set_weapon_enabled(owned_weapons[current_weapon_index], false)
 	current_weapon_index = (current_weapon_index + delta + owned_weapons.size()) % owned_weapons.size()
+	print("Weapon index: ", current_weapon_index)
 	set_weapon_enabled(owned_weapons[current_weapon_index], true)
 	
 	update_weapon_ui()
